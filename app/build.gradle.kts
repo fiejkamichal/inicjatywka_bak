@@ -3,6 +3,15 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("app.cash.sqldelight") version "2.0.0"
+}
+
+sqldelight {
+    databases {
+        create("PhaseDatabase") {
+            packageName.set("com.example.myapplication")
+        }
+    }
 }
 
 android {
@@ -58,12 +67,10 @@ allprojects {
     }
 }
 dependencies {
-    val roomVersion = "2.6.1"
     val navVersion = "2.7.5"
 
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("app.cash.sqldelight:android-driver:2.0.0")
+    implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
 
     implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-android-compiler:2.48.1")

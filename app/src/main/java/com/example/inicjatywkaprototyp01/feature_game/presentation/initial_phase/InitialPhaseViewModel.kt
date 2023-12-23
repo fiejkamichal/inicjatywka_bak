@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.inicjatywkaprototyp01.feature_game.domain.model.Phase
 import com.example.inicjatywkaprototyp01.feature_game.domain.use_case.PhaseUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -40,14 +41,16 @@ class InitialPhaseViewModel @Inject constructor(
         }
     }
 
-    private fun getPhase(){
+    fun getPhase(): Phase.Phases {
+        var phase:Phase.Phases = Phase.Phases.Initial
         getPhaseJob?.cancel()
         getPhaseJob = viewModelScope.launch {
-            val phase = phaseUseCases.getPhase()
+            phase = phaseUseCases.getPhase()
             _state.value = state.value.copy(
                 currentPhase = phase
             )
         }
+        return phase
     }
 
     sealed class UiEvent {

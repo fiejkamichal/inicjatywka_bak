@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS Phase (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    value TEXT NOT NULL
+);
+
+getPhase:
+SELECT * FROM Phase WHERE id = 0;
+
+setPhase:
+INSERT OR REPLACE INTO Phase VALUES (0, :value);
